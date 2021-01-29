@@ -61,11 +61,29 @@ def answer3(text):
 
     f.close()
 
+def answer4(text):
+    dict = word_frequency(text)
 
-f = open("wasteland.txt", "r")
+    new_dict={}
+    for i in range(1,6):
+        max_length=0
+        max_key=""
+        for key in dict:
+            if(len(key)>max_length):
+                max_key=key
+                max_length=len(key)
+
+        new_dict[max_key]=dict[max_key]
+        del dict[max_key]
+
+    return new_dict
+
+
+f = open("test.txt", "r")
 poem = f.read()
 f.close()
 
 normalized_poem= normalize(poem)
 answer1(normalized_poem)
 answer3(normalized_poem)
+answer4(normalized_poem)
