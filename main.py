@@ -1,13 +1,13 @@
 def normalize(text):
-    text = text.replace(",", "")
-    text = text.replace("⁠", "")
-    text = text.replace(";", "")
-    text = text.replace(".", "")
-    text = text.replace("\"", "")
-    text = text.replace("?", "")
+    text = text.replace(",", " ")
+    text = text.replace("⁠", " ")
+    text = text.replace(";", " ")
+    text = text.replace(".", " ")
+    text = text.replace("\"", " ")
+    text = text.replace("?", " ")
     text = text.replace("\n"," ")
-    text= text.replace("(","( ")
-    text = text.replace(")"," )")
+    text= text.replace("("," ")
+    text = text.replace(")"," ")
     text = text.lower()
 
     return text
@@ -37,6 +37,7 @@ def answer1(text):
     f.write(str(count_words(text)))
     f.close()
 
+
 def word_frequency(text):
     dict = {}
     all_words=text.split(" ")
@@ -44,7 +45,22 @@ def word_frequency(text):
     for word in unique_wrods:
         dict[word]=all_words.count(word)
 
+    del dict["" ""]
     return dict
+
+def answer3(text):
+    dict = word_frequency(text)
+    key = list(dict.keys())
+    value= list(dict.values())
+    f=open("out_most_frequent.txt","w")
+
+    for i in range(1,11):
+        f.write(str(i)+". "+key[value.index(max(value))]+"\t"+str(value[value.index(max(value))])+"\n")
+        key.pop(value.index(max(value)))
+        value.pop(value.index(max(value)))
+
+    f.close()
+
 
 f = open("wasteland.txt", "r")
 poem = f.read()
@@ -52,4 +68,4 @@ f.close()
 
 normalized_poem= normalize(poem)
 answer1(normalized_poem)
-
+answer3(normalized_poem)
