@@ -5,6 +5,9 @@ def normalize(text):
     text = text.replace(".", "")
     text = text.replace("\"", "")
     text = text.replace("?", "")
+    text = text.replace("\n"," ")
+    text= text.replace("(","( ")
+    text = text.replace(")"," )")
     text = text.lower()
 
     return text
@@ -34,9 +37,19 @@ def answer1(text):
     f.write(str(count_words(text)))
     f.close()
 
-f = open("test.txt", "r")
+def word_frequency(text):
+    dict = {}
+    all_words=text.split(" ")
+    unique_wrods=set(text.split(" "))
+    for word in unique_wrods:
+        dict[word]=all_words.count(word)
+
+    return dict
+
+f = open("wasteland.txt", "r")
 poem = f.read()
 f.close()
 
 normalized_poem= normalize(poem)
 answer1(normalized_poem)
+
